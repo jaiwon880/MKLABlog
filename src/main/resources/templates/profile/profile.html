@@ -42,6 +42,8 @@ text-align: right;
     <table class="table">
       <thead class="table-dark">
       <tbody>
+        <th scope="row"></th>
+        <img width="240" height="180" th:src="@{'/upload/'+${account.image}}">
       <tr>
         <th scope="row">Username</th>
         <td th:text="${account.username}"></td>

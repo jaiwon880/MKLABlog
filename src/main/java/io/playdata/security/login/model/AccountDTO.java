@@ -14,9 +14,14 @@ public class AccountDTO {
     private Long id;
     private String username;
     private String password;
-    private String image;
     private String passwordConfirm;
     private String name;
     private String address;
     private String email;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
 }
+
