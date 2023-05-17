@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+    function searchAddress() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 검색 결과 선택 시 실행될 함수
+                document.getElementById('address').value = data.roadAddress; // 입력란에 도로명주소 채우기
+            }
+        }).open();
+    }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -25,9 +36,11 @@
                     <label for="name">Name:</label>
                     <input type="text" class="form-control" id="name" th:field="*{name}">
                 </div>
+
                 <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" class="form-control" id="address" th:field="*{address}">
+                    <label for="address">주소:</label>
+                    <input class="form-control" type="text" id="address" name="address" th:field="*{address}">
+                    <button type="button" class="btn btn-secondary" onclick="searchAddress()">검색</button>
                 </div>
                 <button type="submit" class="btn btn-primary">수정 완료</button>
             </form>

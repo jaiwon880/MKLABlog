@@ -1,6 +1,7 @@
 package io.playdata.security.login.model;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ public class AccountDTO {
     private Long id;
     private String username;
     private String password;
+    private String image;
     private String passwordConfirm;
     private String name;
     private String address;

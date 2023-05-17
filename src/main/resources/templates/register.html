@@ -57,7 +57,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <h1 class="text-center">회원가입</h1>
-            <form class="mt-4" action="#" th:action="@{/register}" th:object="${user}" method="post">
+            <form class="mt-4" action="#" th:action="@{/register}" th:object="${user}" method="post" >
                 <div class="form-group">
                     <label for="username">아이디:</label>
                     <input class="form-control" type="text" id="username" name="username" th:field="*{username}"
