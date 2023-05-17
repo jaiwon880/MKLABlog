@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시물 상세보기</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</head>
+<body>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4 th:text="${post.title}">글 제목</h4>
+                </div>
+                <div class="card-body">
+                    <p>
+                        <a th:href="@{/blog/user/{username}(username=${post.username})}" th:text="${post.username}">작성자</a>
+                    </p>
+                    <p th:text="'작성일: ' + ${post.createdAt}">작성일</p>
+                    <p th:text="${post.content}">글 내용</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <div>
+                        <button type="button" class="btn btn-secondary" onclick="goBack()">뒤로가기</button>
+                    </div>
+                    <div>
+                        <!-- 현재 로그인한 사용자와 작성자가 같을 때에만 수정과 삭제 버튼을 표시 -->
+                        <div th:if="${post.username == #authentication.name}">
+                            <a th:href="@{/blog/update/{id}(id=${post.id})}" class="btn btn-primary">수정</a>
+                            <a th:href="@{/blog/delete/{id}(id=${post.id})}" class="btn btn-sm btn-outline-danger"
+                               onclick="return confirmDelete()">삭제</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 댓글 작성 폼 -->
+            <div class="card mt-5">
+                <div class="card-header">
+                    댓글
+                </div>
+                <div class="card-body">
+                    <form id="commentForm">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" placeholder="댓글을 입력하세요" id="commentText"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">댓글 작성</button>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <!-- 댓글 목록 -->
+                    <ul class="list-unstyled" id="commentList"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    var postId = [[${post.id}]];
+
+    document.getElementById("commentForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var commentText = document.getElementById("commentText").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/comment/create", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 201) {
+                    loadComments(postId);
+                } else {
+                    console.error("댓글 작성 실패");
+                }
+            }
+        };
+        xhr.send(JSON.stringify({ postId: postId, text: commentText }));
+
+        document.getElementById("commentText").value = "";
+    });
+
+    function loadComments(postId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/comment/list/" + postId, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var comments = JSON.parse(xhr.responseText);
+                    var commentList = document.getElementById("commentList");
+                    commentList.innerHTML = ""; // 이전 댓글 목록을 초기화
+
+                    if (comments) {
+                        comments.forEach(function(comment) {
+                            var listItem = document.createElement("li");
+                            listItem.className = "list-group-item";
+                            var commentContent = document.createElement("div");
+                            commentContent.className = "d-flex justify-content-between align-items-center";
+                            var commentText = document.createElement("p");
+                            commentText.innerText = comment.text;
+                            var commentInfo = document.createElement("small");
+                            var createdAt = new Date(comment.createdAt);
+                            var formattedCreatedAt = createdAt.toLocaleString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+
+                            commentInfo.innerText = "작성자: " + comment.username + ", 작성시간: " + formattedCreatedAt;
+                            commentContent.appendChild(commentText);
+                            commentContent.appendChild(commentInfo);
+                            listItem.appendChild(commentContent);
+                            commentList.appendChild(listItem);
+                        });
+                    }
+                } else {
+                    console.error("댓글 불러오기 실패");
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    window.onload = function() {
+        loadComments(postId);
+    };
+</script>
+
+</script>
+
+</body>
+</html>

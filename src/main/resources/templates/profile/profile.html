@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+  <style>
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+.profile-card {
+border: 1px solid #ddd;
+border-radius: 5px;
+padding: 20px;
+margin-bottom: 20px;
+}
+
+.profile-card h2 {
+margin-top: 0;
+}
+
+.profile-card table {
+margin-top: 20px;
+}
+
+.profile-card .btn-container {
+margin-top: 20px;
+text-align: right;
+}
+</style>
+
+
+</head>
+<body>
+<div class="container">
+  <div class="profile-card">
+    <h2>Profile</h2>
+    <table class="table">
+      <thead class="table-dark">
+      <tbody>
+      <tr>
+        <th scope="row">Username</th>
+        <td th:text="${account.username}"></td>
+      </tr>
+      <tr>
+        <th scope="row">Email</th>
+        <td th:text="${account.email}"></td>
+      </tr>
+      <tr>
+        <th scope="row">Name</th>
+        <td th:text="${account.name}"></td>
+      </tr>
+      <tr>
+        <th scope="row">Address</th>
+        <td th:text="${account.address}"></td>
+      </tr>
+      </tbody>
+      </thead>
+    </table>
+    <div class="btn-container">
+      <a class="btn btn-primary" th:href="@{/profile/edit}">프로필 수정</a>
+      <form th:action="@{/profile/delete}" method="get" style="display: inline;">
+        <button type="submit" class="btn btn-danger">회원 탈퇴</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

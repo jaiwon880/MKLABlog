@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete Profile</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <h2>회원 탈퇴</h2>
+      <div class="alert alert-danger" role="alert">
+        정말로 회원 탈퇴하시겠습니까?
+      </div>
+      <form th:action="@{/profile/delete}" method="post">
+        <button type="submit" class="btn btn-danger">회원 탈퇴</button>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

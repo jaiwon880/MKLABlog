@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${username} + '의 블로그'"></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+    /* a 태그의 기본 스타일 제거 */
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    </style>
+</head>
+<body>
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+
+<section class="jumbotron d-flex align-items-center justify-content-center" style="height: 10vw; position: relative;">
+    <div style="text-align: center;">
+        <h1 class="display-4" style="font-size: 3vw;"><span th:text="${username}"></span>님의 블로그</h1>
+        <form action="#" th:action="@{/logout}" method="post">
+            <button class="btn btn-primary btn-lg" style="padding: 1vw 2vw; font-size: 1vw;">로그아웃</button>
+        </form>
+    </div>
+</section>
+
+<section class="jumbotron d-flex align-items-center justify-content-center" style="width: 85%; position: relative; background-color: transparent;">
+    <div style="text-align: center;">
+
+        <a href="/blog/posting" class="btn btn-primary" th:if="${#authentication.name == username}" style="position: absolute; top: 0; right: 0;">작성하기</a>
+        <a href="/blog/my-board" class="btn btn-secondary" style="position: absolute; top: 0; right: 100px;">내글보기</a>
+        <a href="/blog/list-view" class="btn btn-secondary" style="position: absolute; top: 0; right: 200px;">
+            <i class="fas fa-list-ul"></i>
+        </a>
+        <a href="/blog/card-view" class="btn btn-secondary" style="position: absolute; top: 0; right: 250px;">
+            <i class="fas fa-th-large"></i>
+        </a>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- 글 목록 카드 -->
+            <div class="card-deck">
+                <div class="card mb-3" th:each="post : ${posts}">
+                    <div class="card-body">
+                        <a th:href="@{/blog/detailview/{id}(id=${post.id})}" style="color: inherit; text-decoration: none;">
+                            <h5 class="card-title" th:text="${post.title}">글 제목</h5>
+                            <p class="card-text" th:text="${post.content}">글 내용</p>
+                            <p class="card-text" th:text="'작성자: ' + ${post.username}">작성자</p>
+                            <p class="card-text" th:text="'작성일: ' + ${post.createdAt}">작성일</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

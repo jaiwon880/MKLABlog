@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부트스트랩 메인 페이지</title>
+    <!-- 부트스트랩 CDN 링크 추가 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<section class="jumbotron text-center">
+    <h1 class="display-4" ><span th:text="${#authentication.name}"></span>님 환영합니다!</h1>
+    <p class="lead">몰?루</p>
+    <form action="#" th:action="@{/logout}" method="post">
+        <button class="btn btn-primary">로그아웃</button>
+    </form>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>기능 1</h2>
+            <p>기능 1에 대한 설명</p>
+        </div>
+        <div class="col-md-4">
+            <h2>기능 2</h2>
+            <p>기능 2에 대한 설명</p>
+        </div>
+        <div class="col-md-4">
+            <h2>기능 3</h2>
+            <p>기능 3에 대한 설명</p>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center py-3 bg-light">
+    <div class="container">
+        <p>&copy; 2023 부트스트랩 로그인 페이지. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap CDN -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
