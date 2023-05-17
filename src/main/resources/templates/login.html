@@ -6,14 +6,13 @@
     <title>로그인</title>
     <!-- 부트스트랩 CDN 링크 추가 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <style>
-    body {
-      padding: 40px;
-    }
-  </style>
 </head>
 <body>
-<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<header>
+    <div class="navbar-wrapper">
+        <div th:replace="partials/navbar :: navbarFragment"></div>
+    </div>
+</header>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4">
@@ -35,6 +34,9 @@
         </div>
     </div>
 </div>
+<footer>
+    <div th:replace="partials/footer :: footer"></div>
+</footer>
 </body>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </html>

@@ -16,12 +16,18 @@
         color: inherit;
         text-decoration: none;
     }
-</style>
+
+
+    </style>
 </head>
 
 <body>
 
-<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<header>
+    <div class="navbar-wrapper">
+        <div th:replace="partials/navbar :: navbarFragment"></div>
+    </div>
+</header>
 
 <section class="jumbotron d-flex align-items-center justify-content-center" style="height: 10vw; position: relative;">
     <div style="text-align: center;">
@@ -32,7 +38,8 @@
     </div>
 </section>
 
-<section class="jumbotron d-flex align-items-center justify-content-center" style="width: 85%; position: relative; background-color: transparent;">
+<section class="jumbotron d-flex align-items-center justify-content-center"
+         style="width: 85%; position: relative; background-color: transparent;">
     <div style="text-align: center;">
         <a href="/blog/posting" class="btn btn-primary" style="position: absolute; top: 0; right: 0;">작성하기</a>
         <a href="/blog/my-board" class="btn btn-secondary" style="position: absolute; top: 0; right: 100px;">내글보기</a>
@@ -46,15 +53,16 @@
 </section>
 
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-16">
             <!-- 글 목록 카드 -->
             <div class="card-deck">
-                <div class="card mb-3"  th:each="post : ${posts}">
+                <div class="card mb-3" th:each="post : ${posts}">
                     <div class="card-body">
-                        <a th:href="@{/blog/detailview/{id}(id=${post.id})}" style="color: inherit; text-decoration: none;">   <h5 class="card-title" th:text="${post.title}">글 제목</h5>
+                        <a th:href="@{/blog/detailview/{id}(id=${post.id})}"
+                           style="color: inherit; text-decoration: none;"><h5 class="card-title"
+                                                                              th:text="${post.title}">글 제목</h5>
                             <p class="card-text" th:text="${post.content}">글 내용</p>
                             <p class="card-text" th:text="'작성자: ' + ${post.username}">작성자</p>
                             <p class="card-text" th:text="'작성일: ' + ${post.createdAt}">작성일</p>
@@ -66,10 +74,8 @@
     </div>
 </div>
 
-<footer class="text-center py-3 bg-light">
-    <div class="container">
-        <p>&copy; 2023 부트스트랩 로그인 페이지. All Rights Reserved.</p>
-    </div>
+<footer>
+    <div th:replace="partials/footer :: footer"></div>
 </footer>
 
 <!-- Bootstrap CDN -->

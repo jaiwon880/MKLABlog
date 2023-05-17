@@ -9,10 +9,16 @@
         function goBack() {
             window.history.back();
         }
+
+
     </script>
 </head>
 <body>
-<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<header>
+    <div class="navbar-wrapper">
+        <div th:replace="partials/navbar :: navbarFragment"></div>
+    </div>
+</header>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8 offset-md-2">
@@ -22,7 +28,8 @@
                 </div>
                 <div class="card-body">
                     <p>
-                        <a th:href="@{/blog/user/{username}(username=${post.username})}" th:text="${post.username}">작성자</a>
+                        <a th:href="@{/blog/user/{username}(username=${post.username})}"
+                           th:text="${post.username}">작성자</a>
                     </p>
                     <p th:text="'작성일: ' + ${post.createdAt}">작성일</p>
                     <p th:text="${post.content}">글 내용</p>
@@ -62,6 +69,9 @@
         </div>
     </div>
 </div>
+<footer>
+    <div th:replace="partials/footer :: footer"></div>
+</footer>
 <script th:inline="javascript">
     var postId = [[${post.id}]];
 
@@ -127,8 +137,9 @@
     window.onload = function() {
         loadComments(postId);
     };
-</script>
 
+
+</script>
 </script>
 
 </body>

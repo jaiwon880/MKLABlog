@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">새로운 글 작성</h5>
-                    <form action="#" th:action="@{/blog/posting}" th:object="${blogpost}" method="post" >
+                    <form action="#" th:action="@{/blog/posting}" th:object="${blogpost}" method="post">
                         <div class="form-group">
                             <label for="title">제목</label>
                             <input type="text" class="form-control" id="title" placeholder="글 제목" name="title">
@@ -24,11 +24,12 @@
 
                         <div class="form-group">
                             <label for="content">내용</label>
-                            <textarea class="form-control" id="content" rows="5" placeholder="글 내용" name="content"></textarea>
+                            <textarea class="form-control" id="content" rows="5" placeholder="글 내용"
+                                      name="content"></textarea>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-secondary" >글 작성</button>
+                            <button type="submit" class="btn btn-secondary">글 작성</button>
                             <button type="button" class="btn btn-primary" onclick="goBack()">뒤로가기</button>
                         </div>
                     </form>
@@ -38,10 +39,8 @@
     </div>
 </div>
 
-<footer class="text-center py-3 bg-light">
-    <div class="container">
-        <p>&copy; 2023 부트스트랩 로그인 페이지. All Rights Reserved.</p>
-    </div>
+<footer>
+    <div th:replace="partials/footer :: footer"></div>
 </footer>
 
 <!-- Bootstrap CDN -->
@@ -52,7 +51,8 @@
     function goBack() {
         window.history.back();
     }
-    </script>
+
+</script>
 </body>
 
 </html>

@@ -10,7 +10,11 @@
 
 <body>
 
-<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<header>
+    <div class="navbar-wrapper">
+        <div th:replace="partials/navbar :: navbarFragment"></div>
+    </div>
+</header>
 <section class="jumbotron text-center">
     <h1 class="display-4" ><span th:text="${#authentication.name}"></span>님 환영합니다!</h1>
     <p class="lead">몰?루</p>
@@ -35,11 +39,8 @@
         </div>
     </div>
 </div>
-
-<footer class="text-center py-3 bg-light">
-    <div class="container">
-        <p>&copy; 2023 부트스트랩 로그인 페이지. All Rights Reserved.</p>
-    </div>
+<footer>
+    <div th:replace="partials/footer :: footer"></div>
 </footer>
 
 <!-- Bootstrap CDN -->

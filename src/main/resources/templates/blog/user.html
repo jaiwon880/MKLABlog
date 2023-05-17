@@ -11,10 +11,15 @@
         color: inherit;
         text-decoration: none;
     }
+
     </style>
 </head>
 <body>
-<nav th:replace="~{navbar :: navbarFragment}"></nav>
+<header>
+    <div class="navbar-wrapper">
+        <div th:replace="partials/navbar :: navbarFragment"></div>
+    </div>
+</header>
 
 <section class="jumbotron d-flex align-items-center justify-content-center" style="height: 10vw; position: relative;">
     <div style="text-align: center;">
@@ -25,10 +30,12 @@
     </div>
 </section>
 
-<section class="jumbotron d-flex align-items-center justify-content-center" style="width: 85%; position: relative; background-color: transparent;">
+<section class="jumbotron d-flex align-items-center justify-content-center"
+         style="width: 85%; position: relative; background-color: transparent;">
     <div style="text-align: center;">
 
-        <a href="/blog/posting" class="btn btn-primary" th:if="${#authentication.name == username}" style="position: absolute; top: 0; right: 0;">작성하기</a>
+        <a href="/blog/posting" class="btn btn-primary" th:if="${#authentication.name == username}"
+           style="position: absolute; top: 0; right: 0;">작성하기</a>
         <a href="/blog/my-board" class="btn btn-secondary" style="position: absolute; top: 0; right: 100px;">내글보기</a>
         <a href="/blog/list-view" class="btn btn-secondary" style="position: absolute; top: 0; right: 200px;">
             <i class="fas fa-list-ul"></i>
@@ -46,7 +53,8 @@
             <div class="card-deck">
                 <div class="card mb-3" th:each="post : ${posts}">
                     <div class="card-body">
-                        <a th:href="@{/blog/detailview/{id}(id=${post.id})}" style="color: inherit; text-decoration: none;">
+                        <a th:href="@{/blog/detailview/{id}(id=${post.id})}"
+                           style="color: inherit; text-decoration: none;">
                             <h5 class="card-title" th:text="${post.title}">글 제목</h5>
                             <p class="card-text" th:text="${post.content}">글 내용</p>
                             <p class="card-text" th:text="'작성자: ' + ${post.username}">작성자</p>
@@ -58,7 +66,9 @@
         </div>
     </div>
 </div>
-
+<footer>
+    <div th:replace="partials/footer :: footer"></div>
+</footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>

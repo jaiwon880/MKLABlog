@@ -25,39 +25,16 @@
     }
     return true;
 }
+
     </script>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/home">로고</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">홈</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">소개</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">서비스</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">문의</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <h1 class="text-center">회원가입</h1>
-            <form class="mt-4" action="#" th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data">
+            <form class="mt-4" action="#" th:action="@{/register}" th:object="${user}" method="post"
+                  enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="small mb-1" for="inputImage">이미지</label>
                     <div class="custom-file">
@@ -105,7 +82,9 @@
         </div>
     </div>
 </div>
-<!-- Add Bootstrap JS script link (optional) -->
+<footer>
+    <div th:replace="partials/footer :: footer"></div>
+</footer>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
