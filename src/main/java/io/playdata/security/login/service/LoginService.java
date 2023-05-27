@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class LoginService {
 
             // 객체 스토리지로 저장하는 코드
             PutObjectRequest request = PutObjectRequest.builder()
-                    .bucket("profile-image")
+                    .bucket("test")
                     .key(newFileName) // 파일명
                     .build(); // 요청을 작Q성 (어느 버켓에, 어떤 이름으로 저장할지)
             // 객체 스토리지 클라이언트에게 요청과 파일(바이트)을 보내는 명령
@@ -74,6 +75,11 @@ public class LoginService {
 
     public void deleteAccountByUsername(String username) throws Exception {
         AccountDTO account = accountRepository.findByUsername(username);
+        DeleteObjectRequest request = DeleteObjectRequest.builder()
+                .bucket("test")
+                .key(account.getImage()) // 삭제할 파일명
+                .build();
+        s3Client.deleteObject(request);
         if (account == null) {
             throw new Exception("유저를 찾을 수 없습니다");
         }
@@ -93,9 +99,10 @@ public class LoginService {
         accountRepository.save(existingAccount);
     }
 
+
     public byte[] loadFile(String fileName) throws IOException { // fileName을 주면 upload 폴더 경로에 있는 파일을 읽어서 전달
         GetObjectRequest request = GetObjectRequest.builder()
-                .bucket("profile-image")
+                .bucket("test")
                 .key(fileName)
                 .build(); // 파일을 받아오기 위한 요청 설정
         return s3Client.getObject(request).readAllBytes(); // 바이트 형태로 변환
