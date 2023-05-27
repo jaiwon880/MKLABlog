@@ -5,6 +5,7 @@ import io.playdata.security.comment.model.CommentDTO;
 import io.playdata.security.comment.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +19,14 @@ public class CommentService {
     @Autowired
     private BoardService boardService;
     private static final DateTimeFormatter TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    @Transactional
+    public void deleteAllByUsername(String username) {
+        List<CommentDTO> userComment = commentRepository.findByUsername(username);
+        if ( userComment == null || userComment.isEmpty() == true ) {
+            return;
+        }
+        commentRepository.deleteAllByUsername(username);
+    }
 
     public CommentDTO createComment(Long postId, String text) {
         CommentDTO comment = new CommentDTO();
@@ -36,7 +45,4 @@ public class CommentService {
         return commentRepository.getCommentsByPostId(postId);
     }
 
-    public void deleteAllCommentsByUsername(String username) {
-        commentRepository.deleteAllCommentsByUsername(username);
-    }
 }

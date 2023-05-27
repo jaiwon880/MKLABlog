@@ -24,7 +24,8 @@ public class LoginController {
     private LoginService loginService;
     @Autowired
     private BoardService boardService;
-
+    @Autowired
+    private CommentService commentService;
     @PostMapping("/register")
     public String register(AccountDTO user,
                            RedirectAttributes redirectAttributes,
@@ -77,20 +78,18 @@ public class LoginController {
     }
 
     @PostMapping("/profile/delete")
-    public String deleteProfile(RedirectAttributes redirectAttributes, Principal principal) {
+    public String deleteProfile(RedirectAttributes redirectAttributes, Principal principal) throws Exception {
         String username = principal.getName();
-        try {
-            loginService.deleteAccountByUsername(username);
-            boardService.deleteAllByUsername(username);
-            SecurityContextHolder.clearContext(); // 로그아웃 처리
 
-            redirectAttributes.addFlashAttribute("msg", "회원 탈퇴되었습니다");
+        loginService.deleteAccountByUsername(username);
+        boardService.deleteAllByUsername(username);
+        commentService.deleteAllByUsername(username);
+        SecurityContextHolder.clearContext(); // 로그아웃 처리
 
-            return "redirect:/";
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/profile";
-        }
+        redirectAttributes.addFlashAttribute("msg", "회원 탈퇴되었습니다");
+
+        return "redirect:/";
+
     }
 
     @GetMapping("/profile/edit")
