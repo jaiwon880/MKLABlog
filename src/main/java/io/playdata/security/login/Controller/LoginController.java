@@ -90,7 +90,6 @@ public class LoginController {
         redirectAttributes.addFlashAttribute("msg", "회원 탈퇴되었습니다");
 
         return "redirect:/";
-
     }
 
     @GetMapping("/profile/edit")
