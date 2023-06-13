@@ -109,7 +109,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         return true;
     }
 
-
     /**
      * OAuth2User 구현
      * @return
