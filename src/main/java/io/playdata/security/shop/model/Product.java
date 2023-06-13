@@ -95,6 +95,7 @@ public class Product {
         return updated;
     }
 
-
-
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 }

@@ -4,6 +4,7 @@ import io.playdata.security.board.service.BoardService;
 import io.playdata.security.comment.service.CommentService;
 import io.playdata.security.login.model.AccountDTO;
 import io.playdata.security.login.service.LoginService;
+import io.playdata.security.shop.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
