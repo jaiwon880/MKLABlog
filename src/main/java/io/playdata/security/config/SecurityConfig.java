@@ -1,6 +1,6 @@
 package io.playdata.security.config;
 
-import io.playdata.security.auth.PrincipalOauth2UserService;
+//import io.playdata.security.auth.PrincipalOauth2UserService;
 import io.playdata.security.login.model.AccountDTO;
 import io.playdata.security.login.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccountRepository accountRepository;
 
-    @Autowired
-    private PrincipalOauth2UserService principalOauth2UserService;
+//    @Autowired
+//    private PrincipalOauth2UserService principalOauth2UserService;
 
 
 
