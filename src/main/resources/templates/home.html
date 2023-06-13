@@ -26,8 +26,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <h2>기능 1</h2>
-            <p>기능 1에 대한 설명</p>
+            <h2>쿠폰 발급 하기</h2>
+            <form method="post" th:action="@{/redis-data}">
+                <button type="submit">발급해보자</button>
+            </form>
         </div>
         <div class="col-md-4">
             <h2>기능 2</h2>
