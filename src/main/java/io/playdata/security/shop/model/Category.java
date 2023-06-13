@@ -1,9 +1,6 @@
 package io.playdata.security.shop.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Category {
@@ -12,7 +9,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
+
+    @Column(name = "slug")
+    private String slug;
 
     // getters and setters
     public Long getId() {
@@ -29,5 +30,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 }
