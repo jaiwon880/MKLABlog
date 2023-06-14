@@ -1,6 +1,4 @@
 package io.playdata.security.config;
-
-//import io.playdata.security.auth.PrincipalOauth2UserService;
 import io.playdata.security.login.model.AccountDTO;
 import io.playdata.security.login.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +15,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.util.Collections;
-
 @Configuration  // 설정 등록 어노테이션
 @EnableWebSecurity  // 웹 보안 설정
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccountRepository accountRepository;
-
-//    @Autowired
-//    private PrincipalOauth2UserService principalOauth2UserService;
-
-
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(
@@ -49,16 +39,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 }).passwordEncoder(passwordEncoder());  // 복호화 -> bcrypt
         // 암호가 DB에 저장될 때, 그대로 저장 되면 보안문제 -> 인코딩을 변환
-        }
+    }
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
     // Spring Security를 위한 사전 작업
-
     // configure -> http 요청이 들어왔을 때 설정
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -73,13 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .defaultSuccessUrl("/home")
                 .permitAll()
-//                .and()					//추가
-//                .oauth2Login()				// OAuth2기반의 로그인인 경우
-//                .loginPage("/loginForm")		// 인증이 필요한 URL에 접근하면 /loginForm으로 이동
-//                .defaultSuccessUrl("/")			// 로그인 성공하면 "/" 으로 이동
-//                .failureUrl("/loginForm")		// 로그인 실패 시 /loginForm으로 이동
-//                .userInfoEndpoint()			// 로그인 성공 후 사용자정보를 가져온다
-//                .userService(principalOauth2UserService)
                 .and()
                 .logout()
                 .logoutUrl("/logout")
@@ -88,6 +68,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .permitAll();
     }
-
 }
-
