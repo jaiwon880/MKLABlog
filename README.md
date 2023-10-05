@@ -1,6 +1,27 @@
-# Security_Blog
+### 📌 Summary
 
-## Spring Security를 이용한 회원가입,로그인,게시판,댓글 CRUD
+2023.05.15 ~ 2023.05.17
+
+#### 팀프로젝트, MKLABlog (Java Springboot)
+- Team: 쟁댕 (2명)
+- 소개: SpringBoot와 Security를 결합한 블로그 
+- 주요 기능
+  - 게시판 CRUD
+  - 댓글 CRUD
+  - 회원 가입/회원 탈퇴
+  - 로그인/로그아웃
+
+
+#### 프로젝트 백로그
+[MKLABlog 노션](https://jjae0510.notion.site/MKLABlog-895719463bf94f7984795e6e2f85abf8?pvs=4)
+
+#### 🛠️ Technology Stack
+- OS: Window
+- SpringBoot (v2.7.13)
+- DB: PlanetScale(MySQL)
+- Git
+- CloudType(Dockerfile 추가 후 배포)
+- IDE: IntelliJ
 
 
 ## 구현
